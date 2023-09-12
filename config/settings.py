@@ -12,7 +12,7 @@ import os
 class GeneralSettings(BaseSettings):
     DEBUG: bool = False
     SECRET_KEY: str
-    DATABASE_URL: PostgresDsn
+    # DATABASE_URL: PostgresDsn
 
 GENERAL_SETTINGS = GeneralSettings()
 

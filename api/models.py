@@ -11,3 +11,13 @@ class Person(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+{
+    "email": "theolam6@gmail.com",
+    "name": "Theola",
+    "username": "tee-tee",
+    "age": 23,
+    "track": "backend engineering",
+    "occupation": "unemployed"
+}
