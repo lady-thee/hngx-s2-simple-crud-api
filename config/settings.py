@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "api.apps.ApiConfig",
+
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -78,22 +82,22 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        # **dj_database_url.config(conn_max_age=600, conn_health_checks=True),
-        # "TIMEZONE": "UTC",
-        # "ATOMIC_REQUESTS": True,
-        # "OPTIONS": {
-        #     "client_encoding": "UTF8",
-        # },
+    # "default": {
+    #     # **dj_database_url.config(conn_max_age=600, conn_health_checks=True),
+    #     # "TIMEZONE": "UTC",
+    #     # "ATOMIC_REQUESTS": True,
+    #     # "OPTIONS": {
+    #     #     "client_encoding": "UTF8",
+    #     # },
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hngx2',
         'USER': 'postgres',
         'HOST': 'localhost',
         'PASSWORD': '2030',
         'PORT': '5432'
     }
-    }
+    
 }
 
 
