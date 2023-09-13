@@ -10,6 +10,24 @@ from rest_framework.response import Response
 from .models import Person
 from .serializers import PersonSerializer, UpdateUserSerializer
 
+import re
+
+
+
+def success_handler(message, status_code):
+    response_data = {
+        'message': message,
+    }
+    return Response(response_data, status_code)
+    
+
+def error_handler(message,  status_code):
+    response_data = {
+        'message': message,
+    }
+    return Response(response_data, status_code)
+   
+
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def createAPIView(request):
@@ -24,9 +42,12 @@ def createAPIView(request):
                     'id': id,
                     'name': name,
                 }
-                return Response({'message': 'User successfully created', 'user': res}, status.HTTP_201_CREATED)
+                return Response({'message':'User successfully created', 'user': res}, status.HTTP_201_CREATED)
+            else:
+                return Response({'Validation erros': serializer.errors}, status.HTTP_400_BAD_REQUEST)
+            
         except Exception as e:
-            raise ValidationError('Serializer not valid', str(e))
+            raise ValidationError('Serializer not valid', serializer.errors)
     safe = {
         'detail': 'API loaded successfully!',
         'status': status.HTTP_200_OK
@@ -38,14 +59,18 @@ def createAPIView(request):
 def readUserAPIViewSearch(request):
     if request.method == 'GET':
         name = request.GET.get('name')
-        print( name)
+        print( type(name))
+        
+        if name is not None and not re.match("^[A-Za-z]+$", name):
+                return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
         try:
-            if name:
+            if name is not None:
                 user = Person.objects.filter(name=name).get()
                 serializer = PersonSerializer(user, many=False)
                 return Response(serializer.data)
+               
         except ObjectDoesNotExist:
-            return Response({'message': 'User does not exist'}, status.HTTP_400_BAD_REQUEST)
+            return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
     
     safe = {
         'detail': 'API loaded successfully!',
@@ -61,8 +86,9 @@ def readUserAPIViewModel(request, pk):
             user = Person.objects.get(id=pk)
             serializer = PersonSerializer(user, many=False)
             return Response(serializer.data)
+        
         except ObjectDoesNotExist:
-            return Response({'message': 'User does not exist'}, status.HTTP_400_BAD_REQUEST)
+            return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
 
     safe = {
         'detail': 'API loaded successfully!',
@@ -81,37 +107,47 @@ def updateUserAPIViewModel(request, pk):
             if serializer.is_valid():
                 # print(serializer.data)
                 serializer.save()
-                return Response({'message': 'User details updated successfully!'}, status.HTTP_200_OK)
+                return success_handler('User details updated successfully!', status.HTTP_200_OK)
             else:
-                print('not valid')
-    except:
-        raise ObjectDoesNotExist('User does not exist!')
+                return Response({'Validation erros': serializer.errors}, status.HTTP_400_BAD_REQUEST)
+            
+    except ObjectDoesNotExist:
+        return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
+    
     safe = {
         'detail': 'API loaded successfully!',
         'status': status.HTTP_200_OK
     }
     return Response(safe)
 
+
 @csrf_exempt
 @api_view(['GET', 'PUT'])
 def updateUserAPIViewSearch(request):
+    name = request.GET.get('name')
+    if name is not None and not re.match("^[A-Za-z]+$", name):
+            return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
     try:
-        name = request.GET.get('name')
         user = Person.objects.filter(name=name).get()
+        
         if request.method == 'PUT':
             serializer = UpdateUserSerializer(user, data=request.data)
             if serializer.is_valid():
                 # print(serializer.data)
                 serializer.save()
-                return Response({'message': 'User details updated successfully!'}, status.HTTP_200_OK)
+                return success_handler( 'User details updated successfully!', status.HTTP_200_OK)
+            else:
+                return Response({'Validation erros': serializer.errors}, status.HTTP_400_BAD_REQUEST)
             
-    except:
-        raise ObjectDoesNotExist('User does not exist!')
+    except ObjectDoesNotExist:
+        return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
+    
     safe = {
         'detail': 'API loaded successfully!',
         'status': status.HTTP_200_OK
     }
     return Response(safe)
+
 
 
 @api_view(['GET', 'DELETE'])
@@ -120,9 +156,32 @@ def deleteUserAPIViewModel(request, pk):
         user = Person.objects.get(id=pk)
         if request.method == 'DELETE':
             user.delete()
-            return Response({'message': 'User successfully deleted!', }, status.HTTP_200_OK)
-    except:
-        raise ObjectDoesNotExist('User does not exist!')
+            return success_handler('User successfully deleted!', status.HTTP_200_OK)
+        
+    except ObjectDoesNotExist:
+        return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
+    
+    safe = {
+        'detail': 'API loaded successfully!',
+        'status': status.HTTP_200_OK
+    }
+    return Response(safe)
+
+
+@api_view(['GET', 'DELETE'])
+def deleteUserAPIViewSearch(request):
+    name = request.GET.get('name')
+    if name is not None and not re.match("^[A-Za-z]+$", name):
+                return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
+    try:
+        user = Person.objects.filter(name=name).get()
+        if request.method == 'DELETE':
+            user.delete()
+            return success_handler('User successfully deleted!', status.HTTP_200_OK)
+        
+    except ObjectDoesNotExist:
+        return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
+    
     safe = {
         'detail': 'API loaded successfully!',
         'status': status.HTTP_200_OK

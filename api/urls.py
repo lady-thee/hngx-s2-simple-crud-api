@@ -9,4 +9,5 @@ urlpatterns = [
     path("update/", views.updateUserAPIViewSearch),
     path("update/<str:pk>/", views.updateUserAPIViewModel),
     path("delete/<str:pk>/", views.deleteUserAPIViewModel),
+    path("delete/", views.deleteUserAPIViewSearch),
 ]
