@@ -85,7 +85,7 @@ def readUserAPIViewModel(request, pk):
         try:
             user = Person.objects.get(id=pk)
             serializer = PersonSerializer(user, many=False)
-            return Response(serializer.data)
+            return Response(serializer.data, status.HTTP_200_OK)
         
         except ObjectDoesNotExist:
             return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
