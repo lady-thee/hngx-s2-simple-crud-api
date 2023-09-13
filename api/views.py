@@ -59,7 +59,6 @@ def createAPIView(request):
 def readUserAPIViewSearch(request):
     if request.method == 'GET':
         name = request.GET.get('name')
-        print( type(name))
         
         if name is not None and not re.match("^[A-Za-z]+$", name):
                 return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
