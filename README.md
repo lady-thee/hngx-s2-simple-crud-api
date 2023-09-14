@@ -27,9 +27,44 @@ This is a simple API that handles CRUD operations **(Create, Read, Update and De
 
 2. Run `pipenv shell` in vscode terminal or any console opened in the directory of the project to activate the virtual environment. 
 
-3. Run `py manage.py runserver` or `python manage.py runserver` to start the django server.
+3. Run `pipenv run pip install -r requirements.txt` to create the requirements and install them. 
+5. Run `pipenv run pip freeze > requirements.txt` to install dependencies from Pipfile 
+4. Run `py manage.py runserver` or `python manage.py runserver` to start the django server.
 
 There, you're good!
+
+
+### Configuration
+
+Create a `.env` file in the root directory. 
+These are the variables the settings will make use of. In the settings.py cnfigure the settings to read variables in the .env file:
+
+```
+from pathlib import Path
+
+import dj_database_url
+
+from pydantic import PostgresDsn
+from pydantic_settings import BaseSettings
+
+import os
+
+
+class GeneralSettings(BaseSettings):
+    DEBUG: bool = False
+    SECRET_KEY: str
+    DATABASE_URL: PostgresDsn
+
+GENERAL_SETTINGS = GeneralSettings()
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = os.environ.get("SECRET_KEY","")
+
+DEBUG = GENERAL_SETTINGS.DEBUG
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+```
 
 ### Usage of the API
 
