@@ -124,7 +124,7 @@ def updateUserAPIViewModel(request, pk):
 @api_view(['GET', 'PUT'])
 def updateUserAPIViewSearch(request):
     name = request.GET.get('name')
-    if name is not None and not re.match("^[A-Za-z]+$", name):
+    if name is not None and not re.match("^[A-Za-z ]+$", name):
             return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
     try:
         user = Person.objects.filter(name=name).get()
@@ -170,7 +170,7 @@ def deleteUserAPIViewModel(request, pk):
 @api_view(['GET', 'DELETE'])
 def deleteUserAPIViewSearch(request):
     name = request.GET.get('name')
-    if name is not None and not re.match("^[A-Za-z]+$", name):
+    if name is not None and not re.match("^[A-Za-z ]+$", name):
                 return error_handler('Parameter must be an a string', status.HTTP_400_BAD_REQUEST)
     try:
         user = Person.objects.filter(name=name).get()

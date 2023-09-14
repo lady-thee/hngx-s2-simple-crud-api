@@ -237,6 +237,13 @@ Let's break down the concepts:
 
 *buildCommand*: This indicates the base build command for the application.
 
+Create a `requirement.txt` file in the root folder, because sometimes render doesn't work well with pipenv, so using the good old-fashioned way, `pip` is an alternative. 
+
+   1. Run `pipenv run pip freeze requirements.txt`
+   2. Run 'pipenv run pip install <package>`
+
+   Render will sometimes require you to downgrade some of the requirements. 
+
 4. Push the code to GitHub. Render wil deploy from the GitHub repository. 
 
 5. On render dashbord, create a new PostgreSQL database. Fill the form for the database.
