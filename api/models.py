@@ -18,7 +18,7 @@ class Person(models.Model):
 }
 
 {
-    "email": "theolam6@gmail.com",
-    "name": "theola",
-    "username": "tee-tee"
+    "email": "janedoe@gmail.com",
+    "name": "Jane Doe",
+    "username": "janey"
 }

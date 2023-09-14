@@ -217,7 +217,7 @@ services:
     name: hngxS2
     env: web
     runtime: python
-    buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
+    buildCommand: "./build.sh"
     startCommand: "gunicorn config.wsgi:application"
     envVars:
       - key: SECRET_KEY
@@ -333,4 +333,7 @@ This starts the shell environment. Import `secrets` then:
 >>>
 ```
 
-Now added the generated key to the SECRETS.KEY variable in the render settings. 
+Now added the generated key to the SECRETS.KEY variable in the render settings along with other env variables. 
+
+And we're done! 
+
