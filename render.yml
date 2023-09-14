@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: hngxS2
+    name: hngx-s2
     env: web
     runtime: python
     buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
