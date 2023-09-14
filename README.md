@@ -2,12 +2,30 @@
 
 This is a simple API that handles CRUD operations **(Create, Read, Update and Delete)**
 
-## Setup of the Project:
-The project was built with the steady hands of Django/Django Rest Framework and runs on a Docker environment. The requirements to run this project include:
-1. Django/Django Rest Framework
-2. Virtual environment(Pipenv)
+# Table of Contents:
+
+- [Prerequisites](#prerequisites)
 
 
+
+## Prerequisites
+
+- [Python]()
+- [Django]()
+- [DjangoRestFramework]()
+- Pipenv/Pip
+- Psycopg2/Psycopg2-binary
+
+## Getting Started
+
+### Installation:
+
+1. **Clone the repository**:
+   In the bash or vscode terminal:
+
+    `git clone [https://github.com/lady-thee/hngx-s2-simple-crud-api.git]`
+
+2. Run `pipenv shell` in vscode terminal or any console opened in the directory of the project. 
 
 ## Usage of the API
 
@@ -47,7 +65,18 @@ To see the url format, [https://github.com/lady-thee/hngx-s2-simple-crud-api.git
 
 
 # HOSTED ON RENDER
-[https://hngx-s2.onrender.com]
+*Create*
+[https://hngx-s2.onrender.com/api/]
+
+*READ*
+[https://hngx-s2.onrender.com/api/read/] <id-of-created-user> or [https://hngx-s2.onrender.com/api/read/] `?name=<name-of-created-user>`  
+
+*UPDATE*
+[https://hngx-s2.onrender.com/api/update/]<id-of-created-user>  or [https://hngx-s2.onrender.com/api/read/] `?name=<name-of-created-user>`
+
+*DELETE*
+[https://hngx-s2.onrender.com/api/delete/]<id-of-created-user>  or [https://hngx-s2.onrender.com/api/delete/] `?name=<name-of-created-user>`
+
 
 **Got a problem?**
 Raise an issue
