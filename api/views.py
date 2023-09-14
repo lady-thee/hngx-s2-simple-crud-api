@@ -143,7 +143,7 @@ def updateUserAPIViewSearch(request):
     
     safe = {
         'detail': 'API loaded successfully!',
-        'status': status.HTTP_200_OK
+        'status': status.HTTP_200_OK,
     }
     return Response(safe)
 

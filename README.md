@@ -47,7 +47,7 @@ To see the url format, [https://github.com/lady-thee/hngx-s2-simple-crud-api.git
 
 
 # HOSTED ON RENDER
-
+[https://hngx-s2.onrender.com]
 
 **Got a problem?**
 Raise an issue
