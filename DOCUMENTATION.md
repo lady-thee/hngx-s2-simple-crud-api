@@ -2,18 +2,33 @@
 
 This is the overly simplified documentation for this very simple and easy to use CRUD API. I have tried to describe the processes as easily as I can. 
 
-## Standard Formats:
+# Table of Contents
+- [Getting started](#getting-started)
+- [Features](#features)
+   - [API Reference](#api-reference)
+   - [Testing](#testing)
+- [Hosting](#how-to-deploy-on-render)
+- [Limitations](#limitations)
+  
+
+
+# Getting Started
+   See [README.md](#) for installations and configurations
+
+# Features
+## API Reference
 
 **Requests**: Each CRUD view is modified to handle basic URL routing and also Dynamic Parameter Handling(DPH), which means that each endpoint, except for CREATE, can make request queries using basic routing and query parameters. (FYI, this was the most interesting thing!)
 
 *CREATE* : The request  in the url goes like: `/api/`.The `CREATE` endpoint takes the name, username and email of a request to create a user. When a user data is passed in `json' format like below:
 ```
 {
-    "name": "theola",
+    "name": "Jane Doe",
     "email": "janedoe@gmail.com",
-    "username": "tee-tee"
+    "username": "janey"
 }
 ```
+
 The `CREATE` endpoint creates a user and returns a `Response` which is a `json` object of values containing the success message, a nested user object which contains the user's id and name and then finally, a status code (which is `HTTP_201_CREATED`).
 
 ```
@@ -198,8 +213,17 @@ Vary: Accept
 
 *That's how it works! Simple right?*
 
+### Testing
 
-# Limitations AND Assumptions
+In the root folder, there is a file called `tests.py` which is Django's inbuilt test file where we can have the test scripts. To run test in this project, in the terminal, run:
+
+```
+py manage.py test api
+```
+This will run the tests in the `api/test.py` file and if all is sound and okay, will return a value of 0 and a status message of Ok. 
+
+
+# Limitations
 
 My major limitation was network. I had initially planned to use Docker for this project but was stumped because of some data issues. Other limitations include:
 1. Time: There may not have been enough timw to adeqautely improve this work. 
