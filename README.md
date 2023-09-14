@@ -80,7 +80,7 @@ This API is used to perform CRUD operations such as:
 
 # UML DIAGRAM LINK
 
-[database scehma](https://drawsql.app/teams/the-a-team-9/diagrams/hngx-stage-2)
+[database schema](https://drawsql.app/teams/the-a-team-9/diagrams/hngx-stage-2)
 
 
 # SOURCE CODE FOR ACTUAL VIEW
