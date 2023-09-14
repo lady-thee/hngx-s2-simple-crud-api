@@ -136,7 +136,7 @@ def updateUserAPIViewSearch(request):
                 serializer.save()
                 return success_handler( 'User details updated successfully!', status.HTTP_200_OK)
             else:
-                return Response({'Validation erros': serializer.errors}, status.HTTP_400_BAD_REQUEST)
+                return Response({'Validation errors': serializer.errors}, status.HTTP_400_BAD_REQUEST)
             
     except ObjectDoesNotExist:
         return error_handler('User does not exist', status.HTTP_400_BAD_REQUEST)
