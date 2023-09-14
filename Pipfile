@@ -5,14 +5,14 @@ name = "pypi"
 
 [packages]
 django = ">=3.2,<3.3"
-djangorestframework = "*"
+djangorestframework = "<4.0.0,>=3.7.0"
 psycopg2-binary = "*"
 dj-database-url = "*"
 pydantic = "*"
 pydantic-settings = "*"
 psycopg2 = "*"
 gunicorn = "*"
-django-cors-headers = "*"
+django-cors-headers = ">=3.7.0,<4.0.0"
 importlib-metadata = "*"
 
 [dev-packages]
