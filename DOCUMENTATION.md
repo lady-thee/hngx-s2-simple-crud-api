@@ -316,4 +316,21 @@ ALLOWED_HOSTS = ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 
 ```
-8. on the render dashboard, click on the **New** button and select new *Web Service*. Connect the GitHub account to the render service. Nect click on the repository that 
+8. on the render dashboard, click on the **New** button and select new *Web Service*. Connect the GitHub account to the render service. Nect click on the repository you want to host and make sure it is updated to the latest commits. 
+
+Follow the steps to set up the project on render. Where `buildCommand`, put the following:
+```
+pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
+```
+In the advanced section on render, you should put a `DEBUG`, `ALLOWED_HOSTS` and `SECRET_KEY` variables. For the secret key, run:
+`py manage.py shell`
+This starts the shell environment. Import `secrets` then:
+
+```
+>>> import secrets
+>>> secrets.token_hex()
+'aed91d5bbe0beae404d3a77a01caad316094f25d16f53b6c099978884c1a22b4'
+>>>
+```
+
+Now added the generated key to the SECRETS.KEY variable in the render settings. 
