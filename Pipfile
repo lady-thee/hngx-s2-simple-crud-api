@@ -11,9 +11,10 @@ dj-database-url = "*"
 pydantic = "*"
 pydantic-settings = "*"
 psycopg2 = "*"
-gunicorn = "*"
+gunicorn = "<4.0.0,>=3.7.0"
 django-cors-headers = ">=3.7.0,<4.0.0"
-importlib-metadata = "*"
+importlib-metadata = ">=3.7.0,<4.0.0"
+filelock = ">=3.7.0,<4.0.0"
 
 [dev-packages]
 
