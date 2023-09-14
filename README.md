@@ -5,6 +5,14 @@ This is a simple API that handles CRUD operations **(Create, Read, Update and De
 # Table of Contents:
 
 - [Prerequisites](#prerequisites)
+- [Getting started](#getting_started)
+   - [Installation](#installation)
+   - [Configuration](#configuration)
+   - [Usage of the API](#usage_of_the_api)
+- [UML Diagram Link](#uml_diagram_link)
+- [Source code](#source_code_for_actual_view)
+- [Hosted on render](#hosted_on_render)
+
 
 
 
