@@ -13,6 +13,7 @@ pydantic-settings = "*"
 psycopg2 = "*"
 gunicorn = "*"
 django-cors-headers = "*"
+importlib-metadata = "*"
 
 [dev-packages]
 
