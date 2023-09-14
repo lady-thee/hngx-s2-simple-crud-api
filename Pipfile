@@ -11,6 +11,8 @@ dj-database-url = "*"
 pydantic = "*"
 pydantic-settings = "*"
 psycopg2 = "*"
+gunicorn = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

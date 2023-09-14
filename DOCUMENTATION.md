@@ -284,4 +284,36 @@ Let's break down the concepts:
 
     Don't forget to push any and all new features to the GitHub repo codebase so that all recent changes will be saved to the repository. 
 
-7. On the render dashboard, 
+7. Install `gunicorn` using `pipenv install gunicorn` and `django-cors-headers` using `pipenv install django-cors-headers`. These are important for hosting the web application on a server.  Ensure that the render web service is included in the `ALLOWED_HOSTS` in .env file so that the server allows render to make requests to the project. 
+
+Your settings.py file for `ALLOWED_HOST` and `debug` should look like this:
+
+```
+from pathlib import Path
+
+import dj_database_url
+
+from pydantic import PostgresDsn
+from pydantic_settings import BaseSettings
+
+import os
+
+
+class GeneralSettings(BaseSettings):
+    DEBUG: bool = False
+    SECRET_KEY: str
+    DATABASE_URL: PostgresDsn
+
+GENERAL_SETTINGS = GeneralSettings()
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = GENERAL_SETTINGS.SECRET_KEY
+
+DEBUG = GENERAL_SETTINGS.DEBUG
+
+ALLOWED_HOSTS = ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+
+
+```
+8. on the render dashboard, click on the **New** button and select new *Web Service*. Connect the GitHub account to the render service. Nect click on the repository that 
