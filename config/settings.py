@@ -12,7 +12,7 @@ import os
 class GeneralSettings(BaseSettings):
     DEBUG: bool = False
     SECRET_KEY: str
-    # DATABASE_URL: PostgresDsn
+    DATABASE_URL: PostgresDsn
 
 GENERAL_SETTINGS = GeneralSettings()
 
@@ -81,22 +81,20 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+
 DATABASES = {
-    # "default": {
-    #     # **dj_database_url.config(conn_max_age=600, conn_health_checks=True),
-    #     # "TIMEZONE": "UTC",
-    #     # "ATOMIC_REQUESTS": True,
-    #     # "OPTIONS": {
-    #     #     "client_encoding": "UTF8",
-    #     # },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hngx2',
-        'USER': 'postgres',
-        'HOST': 'localhost',
-        'PASSWORD': '2030',
-        'PORT': '5432'
-    }
+    "default": dj_database_url.parse(DATABASE_URL)
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'hngx2',
+    #     'USER': 'postgres',
+    #     'HOST': 'localhost',
+    #     'PASSWORD': '2030',
+    #     'PORT': '5432'
+    # }
     
 }
 

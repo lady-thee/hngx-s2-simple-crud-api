@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: hngxS2
+    env: web
+    runtime: python
+    buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: False
+      - key: WEB_CONCURRENCY
+        value: 4

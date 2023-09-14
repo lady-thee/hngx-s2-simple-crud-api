@@ -6,7 +6,7 @@ This is the overly simplified documentation for this very simple and easy to use
 
 **Requests**: Each CRUD view is modified to handle basic URL routing and also Dynamic Parameter Handling(DPH), which means that each endpoint, except for CREATE, can make request queries using basic routing and query parameters. (FYI, this was the most interesting thing!)
 
-*CREATE* : The request format goes like: `/api/`.The `CREATE` endpoint takes the name, username and email of a request to create a user. When a user data is passed in `json' format like below:
+*CREATE* : The request  in the url goes like: `/api/`.The `CREATE` endpoint takes the name, username and email of a request to create a user. When a user data is passed in `json' format like below:
 ```
 {
     "name": "theola",
@@ -209,5 +209,79 @@ My major limitation was network. I had initially planned to use Docker for this 
 
 1. First create an account with [https://render.com]
 2. Create a `render.yml` file in root folder. 
-3. Create a service in the `render.yml` file:
+3. Create a service in the `render.yml` file, inside the file, put the following code:
 
+```
+services:
+  - type: web
+    name: hngxS2
+    env: web
+    runtime: python
+    buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: False
+      - key: WEB_CONCURRENCY
+        value: 4
+
+```
+Let's break down the concepts:
+*type*: web: Specifies that this is a web service.
+
+*name*: hng-s1: Sets the name of the service.
+
+*env*: web: Specifies that environment variables are configured under the web section. The project has a .env file for the variables.
+
+*runtime*: python: Indicates that the service runs a Python application.
+
+*buildCommand*: This indicates the base build command for the application.
+
+4. Push the code to GitHub. Render wil deploy from the GitHub repository. 
+
+5. On render dashbord, create a new PostgreSQL database. Fill the form for the database.
+6. Link database to project using `dj_database_url`. This can be installed using `pipenv install dj_database_url` . The url is gotten from the PostgreSQL database that was created in the previous step. 
+
+    In the settings.py, change the database settings to include the url from the .env file like this: 
+    ```
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL)
+    }
+    ```
+    This reads the database url directly from the .env file in the root folder. The `GENERAL_SETTINGS.DATABASE_URL` is from a pydantic settings class which was set up from the beginning of the project and at the top of the settings.py file. Like so:
+
+    ```
+    from pathlib import Path
+
+    import dj_database_url
+
+    from pydantic import PostgresDsn
+    from pydantic_settings import BaseSettings
+
+    import os
+
+
+    class GeneralSettings(BaseSettings):
+        DEBUG: bool = False
+        SECRET_KEY: str
+        DATABASE_URL: PostgresDsn
+
+    ```
+
+    In the .env file created in the root folder, write the following:
+
+    ```
+    SECRET_KEY=+SV8S2ga3SgYMdJN1AOwwdZZoV5v0aM1eJh39yDxEzY=
+    ALLOWED_HOSTS=localhost,127.0.0.1
+    DEBUG=True
+
+    # database settings
+    DATABASE_URL=postgres://hngx2_user:lqytEW47YNocro5zhWpXW2unUklQrVen@dpg-ck13su7dorps73b4acig-a.oregon-postgres.render.com/hngx2   
+    ```
+    Next, run `py manage.py makemigrations` and `py manage.py migrate` to ensoure that the connection is successful. 
+
+    Don't forget to push any and all new features to the GitHub repo codebase so that all recent changes will be saved to the repository. 
+
+7. On the render dashboard, 

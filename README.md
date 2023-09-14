@@ -32,7 +32,7 @@ Clone the project using `git clone <project-url>`
 
 Once the project is cloned and django is running. Run `pipenv shell` to activate the virtual environment. Then run: `python manage.py runserver`
 
-To see the url format, []
+To see the url format, [https://github.com/lady-thee/hngx-s2-simple-crud-api.git]
 
 
 
