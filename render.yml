@@ -4,7 +4,7 @@ services:
     env: web
     runtime: python
     buildCommand: pipenv install --deploy --ignore-pipfile && pipenv run python manage.py migrate 
-    startCommand: "pipenv run gunicorn config.wsgi:application"
+    startCommand: pipenv run gunicorn config.wsgi:application
     envVars:
       - key: SECRET_KEY
         generateValue: False
