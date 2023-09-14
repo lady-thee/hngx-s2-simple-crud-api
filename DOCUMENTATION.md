@@ -13,7 +13,7 @@ This is the overly simplified documentation for this very simple and easy to use
 
 
 # Getting Started
-   See [README.md](#https://github.com/lady-thee/hngx-s2-simple-crud-api/blob/main/README.md) for installations and configurations
+   See [README.md](https://github.com/lady-thee/hngx-s2-simple-crud-api/blob/main/README.md) for installations and configurations
 
 # Features
 ## API Reference
