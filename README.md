@@ -10,9 +10,9 @@ This is a simple API that handles CRUD operations **(Create, Read, Update and De
 
 ## Prerequisites
 
-- [Python]()
-- [Django]()
-- [DjangoRestFramework]()
+- [Python](https://www.python.org/downloads/)
+- [Django](https://www.djangoproject.com/download/)
+- [DjangoRestFramework](https://www.django-rest-framework.org/)
 - Pipenv/Pip
 - Psycopg2/Psycopg2-binary
 
@@ -80,7 +80,7 @@ This API is used to perform CRUD operations such as:
 
 # UML DIAGRAM LINK
 
-[https://drawsql.app/teams/the-a-team-9/diagrams/hngx-stage-2]
+[database scehma](https://drawsql.app/teams/the-a-team-9/diagrams/hngx-stage-2)
 
 
 # SOURCE CODE FOR ACTUAL VIEW
